@@ -39,7 +39,7 @@ public class Book {
 	private String isbn;
 	
 	@Column(name = "publisher_name", nullable = false, unique = true)
-	private String publishName;
+	private String publisherName;
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinColumn(name = "author_id")
