@@ -1,6 +1,5 @@
 package com.erodriguessantana.bookstoremanager.dto;
 
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -36,7 +35,6 @@ public class BookDTO {
 	@Size(max = 200)
 	private String publisherName;
 	
-	@Valid
 	@NotNull
-	private AuthorDTO author;
+	private Long idAuthor;
 }
