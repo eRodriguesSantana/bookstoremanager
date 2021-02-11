@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.erodriguessantana.bookstoremanager.dto.BookDTO;
 import com.erodriguessantana.bookstoremanager.entity.Book;
 import com.erodriguessantana.bookstoremanager.service.BookService;
 
@@ -21,8 +22,8 @@ public class BookController {
 	}
 	
 	@PostMapping
-    public ResponseEntity<Book> save(@RequestBody Book book) {
-        Book bookSaved = bookService.save(book);
+    public ResponseEntity<Book> save(@RequestBody BookDTO bookDTO) {
+        Book bookSaved = bookService.save(bookDTO);
         if(bookSaved != null)
         	return new ResponseEntity<>(bookSaved, HttpStatus.CREATED);
         return new ResponseEntity<>(bookSaved, HttpStatus.NOT_FOUND);

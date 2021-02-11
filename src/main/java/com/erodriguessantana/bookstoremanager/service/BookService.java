@@ -2,6 +2,7 @@ package com.erodriguessantana.bookstoremanager.service;
 
 import org.springframework.stereotype.Service;
 
+import com.erodriguessantana.bookstoremanager.dto.BookDTO;
 import com.erodriguessantana.bookstoremanager.entity.Book;
 import com.erodriguessantana.bookstoremanager.repository.AuthorRepository;
 import com.erodriguessantana.bookstoremanager.repository.BookRepository;
@@ -17,9 +18,9 @@ public class BookService {
 		this.authorRepository = authorRepository;
 	}
 
-	public Book save(Book book) {
-		if(authorRepository.findById(book.getIdAuthor()).isPresent())
-			return bookRepository.save(book);
+	public Book save(BookDTO bookDTO) {
+		if(authorRepository.findById(bookDTO.getIdAuthor()).isPresent())
+			return bookRepository.save(bookDTO.converterToObject());
 		return null;
 	}
 }
