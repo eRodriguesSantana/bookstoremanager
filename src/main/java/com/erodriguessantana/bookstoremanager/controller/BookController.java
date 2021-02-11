@@ -1,8 +1,13 @@
 package com.erodriguessantana.bookstoremanager.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.erodriguessantana.bookstoremanager.entity.Book;
 import com.erodriguessantana.bookstoremanager.service.BookService;
 
 @RestController
@@ -14,5 +19,13 @@ public class BookController {
 	public BookController(BookService bookService) {
 		this.bookService = bookService;
 	}
+	
+	@PostMapping
+    public ResponseEntity<Book> save(@RequestBody Book book) {
+        Book bookSaved = bookService.save(book);
+        if(bookSaved != null)
+        	return new ResponseEntity<>(bookSaved, HttpStatus.CREATED);
+        return new ResponseEntity<>(bookSaved, HttpStatus.NOT_FOUND);
+    }
 
 }
