@@ -9,6 +9,8 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.erodriguessantana.bookstoremanager.dto.BookDTO;
+
 @Entity
 public class Book {
 
@@ -112,5 +114,9 @@ public class Book {
 
 	public void setIdAuthor(Long idAuthor) {
 		this.idAuthor = idAuthor;
+	}
+	
+	public BookDTO converterToDTO(Book book){
+	    return new BookDTO(book.getId(), book.getName(), book.getPages(), book.getChapters(), book.getIsbn(), book.getPublisherName(), book.getIdAuthor());
 	}
 }

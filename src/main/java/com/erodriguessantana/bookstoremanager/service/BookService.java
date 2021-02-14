@@ -23,4 +23,11 @@ public class BookService {
 			return bookRepository.save(bookDTO.converterToObject());
 		return null;
 	}
+
+	public BookDTO findById(Long id) {
+		Book bookId = bookRepository.findById(id).orElse(null);
+		if(bookId != null)
+			return new Book().converterToDTO(bookId);
+		return null;
+	}
 }
