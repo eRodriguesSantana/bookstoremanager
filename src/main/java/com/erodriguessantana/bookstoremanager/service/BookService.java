@@ -1,8 +1,13 @@
 package com.erodriguessantana.bookstoremanager.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
+import com.erodriguessantana.bookstoremanager.dto.AuthorDTO;
 import com.erodriguessantana.bookstoremanager.dto.BookDTO;
+import com.erodriguessantana.bookstoremanager.dto.ResponseBookAuthorDTO;
+import com.erodriguessantana.bookstoremanager.entity.Author;
 import com.erodriguessantana.bookstoremanager.entity.Book;
 import com.erodriguessantana.bookstoremanager.repository.AuthorRepository;
 import com.erodriguessantana.bookstoremanager.repository.BookRepository;
@@ -19,15 +24,40 @@ public class BookService {
 	}
 
 	public Book save(BookDTO bookDTO) {
-		if(authorRepository.findById(bookDTO.getIdAuthor()).isPresent())
+		if (authorRepository.findById(bookDTO.getIdAuthor()).isPresent())
 			return bookRepository.save(bookDTO.converterToObject());
 		return null;
 	}
 
-	public BookDTO findById(Long id) {
+	public BookDTO findBookById(Long id) {
 		Book bookId = bookRepository.findById(id).orElse(null);
-		if(bookId != null)
+		if (bookId != null)
 			return new Book().converterToDTO(bookId);
+		return null;
+	}
+
+	public AuthorDTO findAuthorById(Long id) {
+		Author authorId = authorRepository.findById(id).orElse(null);
+		if (authorId != null)
+			return new Author().converterToDTO(authorId);
+		return null;
+	}
+
+	public Optional<Book> findById(Long id) {
+		return bookRepository.findById(id);
+	}
+
+	public ResponseBookAuthorDTO findByBookAuthorByID(Long id) {
+		Book bookId = bookRepository.findById(id).orElse(null);
+		Author authorId = authorRepository.findById(bookId.getIdAuthor()).orElse(null);
+		if (bookId != null && authorId != null) {
+			ResponseBookAuthorDTO responseBookAuthorDTO = new ResponseBookAuthorDTO();
+			responseBookAuthorDTO.setBook(bookId);
+			responseBookAuthorDTO.setAuthor(authorId);
+
+			return responseBookAuthorDTO;
+		}
+
 		return null;
 	}
 }
