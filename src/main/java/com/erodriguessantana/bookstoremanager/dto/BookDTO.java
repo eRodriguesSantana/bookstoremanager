@@ -1,49 +1,14 @@
 package com.erodriguessantana.bookstoremanager.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
-import com.erodriguessantana.bookstoremanager.entity.Book;
-
 public class BookDTO {
 
 	private Long id;
-
-	@NotBlank
-	@Size(max = 200)
 	private String name;
-
-	@NotNull
 	private Integer pages;
-
-	@NotNull
 	private Integer chapters;
-
-	@NotBlank
-	@Size(max = 200)
 	private String isbn;
-
-	@NotBlank
-	@Size(max = 200)
 	private String publisherName;
-
-	@NotNull
 	private Long idAuthor;
-
-	public BookDTO() {
-	}
-
-	public BookDTO(Long id, String name, Integer pages, Integer chapters, String isbn, String publisherName,
-			Long idAuthor) {
-		this.id = id;
-		this.name = name;
-		this.pages = pages;
-		this.chapters = chapters;
-		this.isbn = isbn;
-		this.publisherName = publisherName;
-		this.idAuthor = idAuthor;
-	}
 
 	public Long getId() {
 		return id;
@@ -99,9 +64,5 @@ public class BookDTO {
 
 	public void setIdAuthor(Long idAuthor) {
 		this.idAuthor = idAuthor;
-	}
-	
-	public Book converterToObject(){
-	    return new Book(id, name, pages, chapters, isbn, publisherName, idAuthor);
 	}
 }
