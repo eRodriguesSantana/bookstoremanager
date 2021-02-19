@@ -1,17 +1,13 @@
 package com.erodriguessantana.bookstoremanager.service;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
-import com.erodriguessantana.bookstoremanager.dto.AuthorDTO;
 import com.erodriguessantana.bookstoremanager.dto.BookDTO;
-import com.erodriguessantana.bookstoremanager.dto.ResponseBookAuthorDTO;
-import com.erodriguessantana.bookstoremanager.entity.Author;
 import com.erodriguessantana.bookstoremanager.entity.Book;
 import com.erodriguessantana.bookstoremanager.repository.AuthorRepository;
 import com.erodriguessantana.bookstoremanager.repository.BookRepository;
 import com.erodriguessantana.bookstoremanager.utils.ConverterBookDtoToObject;
+import com.erodriguessantana.bookstoremanager.utils.ConverterObjectToBookDTO;
 
 @Service
 public class BookService {
@@ -35,11 +31,11 @@ public class BookService {
 	public BookDTO findBookById(Long id) {
 		Book bookId = bookRepository.findById(id).orElse(null);
 		if (bookId != null)
-			return null;//new Book().converterToDTO(bookId);
+			return new ConverterObjectToBookDTO().converterObjectToBookDTO(bookId);
 		return null;
 	}
 
-	public AuthorDTO findAuthorById(Long id) {
+	/*public AuthorDTO findAuthorById(Long id) {
 		Author authorId = authorRepository.findById(id).orElse(null);
 		if (authorId != null)
 			return new Author().converterToDTO(authorId);
@@ -48,12 +44,15 @@ public class BookService {
 
 	public Optional<Book> findById(Long id) {
 		return bookRepository.findById(id);
-	}
+	}*/
 
-	public ResponseBookAuthorDTO findByBookAuthorByID(Long id) {
+	/*public ResponseBookAuthorDTO findByBookAuthorByID(Long id) {
 		Book bookId = bookRepository.findById(id).orElse(null);
 		Author authorId = authorRepository.findById(bookId.getIdAuthor()).orElse(null);
+		
 		if (bookId != null && authorId != null) {
+			
+			
 			ResponseBookAuthorDTO responseBookAuthorDTO = new ResponseBookAuthorDTO();
 			responseBookAuthorDTO.setBook(bookId);
 			responseBookAuthorDTO.setAuthor(authorId);
@@ -62,5 +61,5 @@ public class BookService {
 		}
 
 		return null;
-	}
+	}*/
 }
