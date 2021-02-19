@@ -119,4 +119,5 @@ public class Book {
 	public BookDTO converterToDTO(Book book){
 	    return new BookDTO(book.getId(), book.getName(), book.getPages(), book.getChapters(), book.getIsbn(), book.getPublisherName(), book.getIdAuthor());
 	}
+
 }
