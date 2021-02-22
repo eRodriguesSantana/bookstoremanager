@@ -9,8 +9,6 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.erodriguessantana.bookstoremanager.dto.AuthorDTO;
-
 @Entity
 public class Author {
 
@@ -58,10 +56,4 @@ public class Author {
 	public void setAge(Integer age) {
 		this.age = age;
 	}
-
-	public AuthorDTO converterToDTO(Author authorId) {
-		return new AuthorDTO(id, name, age);
-	}
-	
-	
 }
