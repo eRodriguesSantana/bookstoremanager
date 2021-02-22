@@ -44,8 +44,6 @@ public class BookService {
 		Author authorId = authorRepository.findById(bookId.getIdAuthor()).orElse(null);
 		
 		if (bookId != null && authorId != null) {
-			
-			
 			ResponseBookAuthorDTO responseBookAuthorDTO = new ResponseBookAuthorDTO();
 			responseBookAuthorDTO.setBook(bookId);
 			responseBookAuthorDTO.setAuthor(authorId);
