@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +44,31 @@ public class BookController {
 	@PostMapping
     public ResponseEntity<?> save(@RequestBody BookDTO bookDTO) {	
         Book bookSaved = bookService.save(bookDTO);
+        
 		return bookSaved != null 
 				? new ResponseEntity<>(bookSaved, HttpStatus.CREATED) 
 				: new ResponseEntity<>("ID do Author informado não existe na base de dados.", HttpStatus.NOT_FOUND);
     }
+	
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@RequestBody BookDTO bookDTO, @PathVariable Long id) {
+		
+		if(bookService.findBookById(id) != null) {
+			Book bookSaved = bookService.save(bookDTO);
+			
+	        if(bookSaved != null) {
+	        	bookDTO.setId(id);        	
+	        	bookSaved.setName(bookDTO.getName());
+	        	bookSaved.setPages(bookDTO.getPages());
+	        	bookSaved.setChapters(bookDTO.getChapters());
+	        	bookSaved.setIsbn(bookDTO.getIsbn());
+	        	bookSaved.setPublisherName(bookDTO.getPublisherName());
+	        	bookSaved.setIdAuthor(bookDTO.getIdAuthor());
+	        	
+	        	return new ResponseEntity<>(bookSaved, HttpStatus.CREATED);
+	        }
+		}
+        return new ResponseEntity<>("ID informado para atualização não existe na base de dados.", HttpStatus.NOT_FOUND);
+	}
+	
 }

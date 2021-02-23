@@ -35,8 +35,6 @@ public class BookService {
 			return bookRepository.save(dtoToObjectBook);
 		}		
 		return null;
-		
-		
 	}
 
 	public ResponseBookAuthorDTO findByBookAuthorByID(Long id) {
@@ -50,7 +48,6 @@ public class BookService {
 
 			return responseBookAuthorDTO;
 		}
-
 		return null;
 	}
 }
