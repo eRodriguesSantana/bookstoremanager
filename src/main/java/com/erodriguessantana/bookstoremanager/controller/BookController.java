@@ -61,7 +61,7 @@ public class BookController {
 		if (bookService.findBookById(id) != null) {
 			Book bookSaved = bookService.save(bookDTO);
 
-			if (bookSaved != null) {
+			if (bookSaved != null && bookSaved.getId() == id) {
 				bookDTO.setId(id);
 				bookSaved.setName(bookDTO.getName());
 				bookSaved.setPages(bookDTO.getPages());
@@ -72,6 +72,7 @@ public class BookController {
 
 				return new ResponseEntity<>(bookSaved, HttpStatus.CREATED);
 			}
+			return new ResponseEntity<>("ID do corpo da requisição não confere com o ID da uri", HttpStatus.NOT_FOUND);
 		}
 		return new ResponseEntity<>("ID informado para atualização não existe na base de dados.", HttpStatus.NOT_FOUND);
 	}
