@@ -87,8 +87,8 @@ public class BookController {
 		    @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
 		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 		})
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, produces="application/json")
-	@PutMapping("/{id}")
+	@RequestMapping(value = "/update/{id}", method = RequestMethod.PUT, produces="application/json")
+	@PutMapping("/update/{id}")
 	public ResponseEntity<?> update(@RequestBody BookDTO bookDTO, @PathVariable Long id) {
 		try {
 			if (bookService.findBookById(id) != null) {
