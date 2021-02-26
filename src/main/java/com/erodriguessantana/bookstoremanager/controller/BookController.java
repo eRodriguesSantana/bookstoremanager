@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,7 +41,7 @@ public class BookController {
 		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 		})
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces="application/json")
-	@GetMapping()
+	@GetMapping("/")
 	public List<Book> getAll() {
 		return bookService.getAll();
 	}
@@ -129,5 +130,16 @@ public class BookController {
 					HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@DeleteMapping("/delete/{id}")
+	public ResponseEntity<?> delete(Book book) {
+		
+		if(bookService.delete(book) == true)
+			return new ResponseEntity<>("Book removido com sucesso.",
+				HttpStatus.OK);
+		
+		return new ResponseEntity<>("Erro na remoção. ID informado não existe na base de dados.",
+				HttpStatus.NOT_IMPLEMENTED);
 
+	}
 }
