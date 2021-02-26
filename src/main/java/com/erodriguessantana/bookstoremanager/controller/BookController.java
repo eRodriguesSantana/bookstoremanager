@@ -34,8 +34,8 @@ public class BookController {
 		this.bookService = bookService;
 	}
 
-	@ApiOperation(value = "Retorna uma list de Books")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna uma list de Books"),
+	@ApiOperation(value = "Retorna uma lista de Books")
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna uma lista de Books"),
 			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
