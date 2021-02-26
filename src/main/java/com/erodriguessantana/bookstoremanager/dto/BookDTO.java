@@ -1,13 +1,28 @@
 package com.erodriguessantana.bookstoremanager.dto;
 
+import io.swagger.annotations.ApiModelProperty;
+
 public class BookDTO {
 
+	@ApiModelProperty(value = "Código do Book")
 	private Long id;
+	
+	@ApiModelProperty(value = "Nome do Book")
 	private String name;
+	
+	@ApiModelProperty(value = "Quantidade de páginas do Book")
 	private Integer pages;
+	
+	@ApiModelProperty(value = "Quantidade de capítulos do Book")
 	private Integer chapters;
+	
+	@ApiModelProperty(value = "ISBN do Book")
 	private String isbn;
+	
+	@ApiModelProperty(value = "Nome da publicadora do Book")
 	private String publisherName;
+	
+	@ApiModelProperty(value = "ID do Author do Book")
 	private Long idAuthor;
 
 	public Long getId() {
