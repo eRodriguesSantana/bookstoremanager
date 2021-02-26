@@ -9,36 +9,45 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModelProperty;
+
 @Entity
 public class Book {
 
+	@ApiModelProperty(value = "Código do Book")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@ApiModelProperty(value = "Nome do Book")
 	@Column(nullable = false, unique = true)
 	@NotBlank
 	@Size(max = 200)
 	private String name;
 
+	@ApiModelProperty(value = "Quantidade de páginas do Book")
 	@Column(nullable = false)
 	@NotNull
 	private Integer pages;
 
+	@ApiModelProperty(value = "Quantidade de capítulos do Book")
 	@Column(nullable = false)
 	@NotNull
 	private Integer chapters;
 
+	@ApiModelProperty(value = "ISBN do Book")
 	@Column(nullable = false)
 	@NotBlank
 	@Size(max = 200)
 	private String isbn;
 
+	@ApiModelProperty(value = "Nome da publicadora do Book")
 	@Column(name = "publisher_name", nullable = false)
 	@NotBlank
 	@Size(max = 200)
 	private String publisherName;
 
+	@ApiModelProperty(value = "ID do Author do Book")
 	@Column(name = "id_author", nullable = false)
 	@NotNull
 	private Long idAuthor;
