@@ -57,12 +57,8 @@ public class BookService {
 		return null;
 	}
 	
-	public boolean delete(Book book) {
-		if(findBookById(book.getId()) != null) {
-			bookRepository.delete(book);
-			return true;
-		}
-		return false;
+	public void delete(Long id) {
+		bookRepository.deleteById(id);
 			
 	}
 }
