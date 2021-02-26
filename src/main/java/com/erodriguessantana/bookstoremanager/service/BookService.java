@@ -1,5 +1,7 @@
 package com.erodriguessantana.bookstoremanager.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import com.erodriguessantana.bookstoremanager.dto.BookDTO;
@@ -20,6 +22,10 @@ public class BookService {
 	public BookService(BookRepository bookRepository, AuthorRepository authorRepository) {
 		this.bookRepository = bookRepository;
 		this.authorRepository = authorRepository;
+	}
+	
+	public List<Book> getAll() {
+		return bookRepository.findAll();
 	}
 
 	public BookDTO findBookById(Long id) {

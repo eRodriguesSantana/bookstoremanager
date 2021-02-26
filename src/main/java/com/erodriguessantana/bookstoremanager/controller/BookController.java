@@ -1,5 +1,7 @@
 package com.erodriguessantana.bookstoremanager.controller;
 
+import java.util.List;
+
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +31,18 @@ public class BookController {
 
 	public BookController(BookService bookService) {
 		this.bookService = bookService;
+	}
+	
+	@ApiOperation(value = "Retorna uma list de Books")
+	@ApiResponses(value = {
+		    @ApiResponse(code = 200, message = "Retorna uma list de Books"),
+		    @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+		    @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+		})
+	@RequestMapping(value = "/", method = RequestMethod.GET, produces="application/json")
+	@GetMapping()
+	public List<Book> getAll() {
+		return bookService.getAll();
 	}
 
 	@ApiOperation(value = "Retorna um Book pelo ID")
