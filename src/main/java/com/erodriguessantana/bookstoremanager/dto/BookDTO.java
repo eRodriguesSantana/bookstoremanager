@@ -1,5 +1,7 @@
 package com.erodriguessantana.bookstoremanager.dto;
 
+import com.erodriguessantana.bookstoremanager.entity.BookType;
+
 import io.swagger.annotations.ApiModelProperty;
 
 public class BookDTO {
@@ -24,6 +26,9 @@ public class BookDTO {
 	
 	@ApiModelProperty(value = "ID do Author do Book")
 	private Long idAuthor;
+	
+	@ApiModelProperty(value = "Tipo do Livro")
+	private BookType bookType;
 
 	public Long getId() {
 		return id;
@@ -79,5 +84,13 @@ public class BookDTO {
 
 	public void setIdAuthor(Long idAuthor) {
 		this.idAuthor = idAuthor;
+	}
+
+	public BookType getBookType() {
+		return bookType;
+	}
+
+	public void setBookType(BookType bookType) {
+		this.bookType = bookType;
 	}
 }

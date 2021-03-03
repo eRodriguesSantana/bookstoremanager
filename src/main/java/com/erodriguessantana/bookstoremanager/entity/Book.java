@@ -2,6 +2,8 @@ package com.erodriguessantana.bookstoremanager.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -51,6 +53,12 @@ public class Book {
 	@Column(name = "id_author", nullable = false)
 	@NotNull
 	private Long idAuthor;
+	
+	@ApiModelProperty(value = "Tipo do Livro")
+	@Column(name = "book_type", nullable = false)
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	private BookType bookType;
 
 	public Book() {
 	}
@@ -121,5 +129,13 @@ public class Book {
 
 	public void setIdAuthor(Long idAuthor) {
 		this.idAuthor = idAuthor;
+	}
+
+	public BookType getBookType() {
+		return bookType;
+	}
+
+	public void setBookType(BookType bookType) {
+		this.bookType = bookType;
 	}
 }

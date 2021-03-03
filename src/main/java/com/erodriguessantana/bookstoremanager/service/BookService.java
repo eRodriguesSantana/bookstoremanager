@@ -66,6 +66,7 @@ public class BookService implements IBook{
 					bookSaved.setPages(bookDTO.getPages());
 					bookSaved.setChapters(bookDTO.getChapters());
 					bookSaved.setIsbn(bookDTO.getIsbn());
+					bookSaved.setBookType(bookDTO.getBookType());
 					bookSaved.setPublisherName(bookDTO.getPublisherName());
 					bookSaved.setIdAuthor(bookDTO.getIdAuthor());
 
