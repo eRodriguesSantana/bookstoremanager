@@ -13,10 +13,11 @@ import com.erodriguessantana.bookstoremanager.entity.Author;
 import com.erodriguessantana.bookstoremanager.entity.Book;
 import com.erodriguessantana.bookstoremanager.repository.AuthorRepository;
 import com.erodriguessantana.bookstoremanager.repository.BookRepository;
+import com.erodriguessantana.bookstoremanager.service.impl.IBook;
 import com.erodriguessantana.bookstoremanager.utilsBookDTO.ConverterBookDtoToObject;
 
 @Service
-public class BookService {
+public class BookService implements IBook{
 
 	private BookRepository bookRepository;
 	private AuthorRepository authorRepository;
@@ -97,6 +98,5 @@ public class BookService {
 
 	public void delete(Long id) {
 		bookRepository.deleteById(id);
-
 	}
 }
