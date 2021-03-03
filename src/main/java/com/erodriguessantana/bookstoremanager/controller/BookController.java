@@ -51,10 +51,7 @@ public class BookController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findBookById(@PathVariable Long id) {
-		BookDTO bookDtoId = bookService.findBookById(id);
-		if (bookDtoId != null)
-			return new ResponseEntity<>(bookDtoId, HttpStatus.OK);
-		return new ResponseEntity<>("ID do Book informado não existe na base de dados.", HttpStatus.NOT_FOUND);
+		return bookService.findBookById(id);
 	}
 
 	@ApiOperation(value = "Retorna um Book com Author pelo ID")

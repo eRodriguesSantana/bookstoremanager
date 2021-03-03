@@ -2,6 +2,8 @@ package com.erodriguessantana.bookstoremanager.service;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.erodriguessantana.bookstoremanager.dto.BookDTO;
@@ -11,7 +13,6 @@ import com.erodriguessantana.bookstoremanager.entity.Book;
 import com.erodriguessantana.bookstoremanager.repository.AuthorRepository;
 import com.erodriguessantana.bookstoremanager.repository.BookRepository;
 import com.erodriguessantana.bookstoremanager.utilsBookDTO.ConverterBookDtoToObject;
-import com.erodriguessantana.bookstoremanager.utilsBookDTO.ConverterObjectToBookDTO;
 
 @Service
 public class BookService {
@@ -27,12 +28,12 @@ public class BookService {
 	public List<Book> getAll() {
 		return bookRepository.findAll();
 	}
-
-	public BookDTO findBookById(Long id) {
+	
+	public ResponseEntity<?> findBookById(Long id) {
 		Book bookId = bookRepository.findById(id).orElse(null);
 		if (bookId != null)
-			return new ConverterObjectToBookDTO().converterObjectToBookDTO(bookId);
-		return null;
+			return new ResponseEntity<>(bookId, HttpStatus.OK);
+		return new ResponseEntity<>("ID do Book informado não existe na base de dados.", HttpStatus.NOT_FOUND);
 	}
 	
 	public Book save(BookDTO bookDTO) {
