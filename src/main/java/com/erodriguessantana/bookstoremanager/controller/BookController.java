@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.erodriguessantana.bookstoremanager.dto.BookDTO;
-import com.erodriguessantana.bookstoremanager.dto.ResponseBookAuthorDTO;
 import com.erodriguessantana.bookstoremanager.entity.Book;
 import com.erodriguessantana.bookstoremanager.service.BookService;
 
@@ -36,8 +35,8 @@ public class BookController {
 
 	@ApiOperation(value = "Retorna uma lista de Books")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna uma lista de Books"),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-			@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
+							@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+							@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json")
 	@GetMapping("/")
 	public List<Book> getAll() {
@@ -46,8 +45,8 @@ public class BookController {
 
 	@ApiOperation(value = "Retorna um Book pelo ID")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna um Book pelo ID"),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-			@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
+							@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+							@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = "application/json")
 	@GetMapping("/{id}")
 	public ResponseEntity<?> findBookById(@PathVariable Long id) {
@@ -56,22 +55,18 @@ public class BookController {
 
 	@ApiOperation(value = "Retorna um Book com Author pelo ID")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna um Book com Author pelo ID"),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-			@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
+							@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+							@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
 	@RequestMapping(value = "/bookwithauthor/{id}", method = RequestMethod.GET, produces = "application/json")
 	@GetMapping("/bookwithauthor/{id}")
 	public ResponseEntity<?> findBookAndAuthorById(@PathVariable Long id) {
-		ResponseBookAuthorDTO bookAuthorId = bookService.findByBookAuthorByID(id);
-		if (bookAuthorId != null)
-			return new ResponseEntity<>(bookAuthorId, HttpStatus.OK);
-		return new ResponseEntity<>("ID do Book informado não existe na base de dados.", HttpStatus.NOT_FOUND);
+		return bookService.findByBookAuthorByID(id);
 	}
 
 	@ApiOperation(value = "Registra um novo Book informando um ID de Author já cadastrado")
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Registra um novo Book informando um ID de Author já cadastrado"),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-			@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
+	@ApiResponses(value = {	@ApiResponse(code = 200, message = "Registra um novo Book informando um ID de Author já cadastrado"),
+							@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+							@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
 	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
 	@PostMapping("/create")
 	public ResponseEntity<?> save(@RequestBody BookDTO bookDTO) {
@@ -87,10 +82,9 @@ public class BookController {
 	}
 
 	@ApiOperation(value = "Altera os dados de um Book previamente registrado informando um ID de Author já cadastrado (opcional)")
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Altera os dados de um Book previamente registrado informando um ID de Author já cadastrado (opcional)"),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-			@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
+	@ApiResponses(value = {	@ApiResponse(code = 200, message = "Altera os dados de um Book previamente registrado informando um ID de Author já cadastrado (opcional)"),
+							@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+							@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.PUT, produces = "application/json")
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?> update(@RequestBody BookDTO bookDTO, @PathVariable Long id) {
@@ -120,10 +114,9 @@ public class BookController {
 	}
 
 	@ApiOperation(value = "Remove os dados de um Book previamente registrado informando um ID.")
-	@ApiResponses(value = {
-			@ApiResponse(code = 200, message = "Remove os dados de um Book previamente registrado informando um ID."),
-			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-			@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
+	@ApiResponses(value = {	@ApiResponse(code = 200, message = "Remove os dados de um Book previamente registrado informando um ID."),
+							@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+							@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
 	@RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE, produces = "application/json")
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {

@@ -24,42 +24,43 @@ public class BookService {
 		this.bookRepository = bookRepository;
 		this.authorRepository = authorRepository;
 	}
-	
+
 	public List<Book> getAll() {
 		return bookRepository.findAll();
 	}
-	
+
 	public ResponseEntity<?> findBookById(Long id) {
 		Book bookId = bookRepository.findById(id).orElse(null);
 		if (bookId != null)
 			return new ResponseEntity<>(bookId, HttpStatus.OK);
 		return new ResponseEntity<>("ID do Book informado não existe na base de dados.", HttpStatus.NOT_FOUND);
 	}
-	
+
 	public Book save(BookDTO bookDTO) {
 		if (authorRepository.findById(bookDTO.getIdAuthor()).isPresent()) {
 			Book dtoToObjectBook = new ConverterBookDtoToObject().converterBookDtoToObject(bookDTO);
 			return bookRepository.save(dtoToObjectBook);
-		}		
+		}
 		return null;
 	}
 
-	public ResponseBookAuthorDTO findByBookAuthorByID(Long id) {
+	public ResponseEntity<?> findByBookAuthorByID(Long id) {
 		Book bookId = bookRepository.findById(id).orElse(null);
-		Author authorId = authorRepository.findById(bookId.getIdAuthor()).orElse(null);
-		
-		if (bookId != null && authorId != null) {
+
+		if (bookId != null) {
+			Author authorId = authorRepository.findById(bookId.getIdAuthor()).orElse(null);
 			ResponseBookAuthorDTO responseBookAuthorDTO = new ResponseBookAuthorDTO();
 			responseBookAuthorDTO.setBook(bookId);
 			responseBookAuthorDTO.setAuthor(authorId);
 
-			return responseBookAuthorDTO;
+			return new ResponseEntity<>(responseBookAuthorDTO, HttpStatus.OK);
 		}
-		return null;
+		return new ResponseEntity<>("ID do Book informado não existe na base de dados.", HttpStatus.NOT_FOUND);
+
 	}
-	
+
 	public void delete(Long id) {
 		bookRepository.deleteById(id);
-			
+
 	}
 }
