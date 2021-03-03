@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -71,37 +72,15 @@ public class BookController {
 		return bookService.save(bookDTO);
 	}
 
-	/*@ApiOperation(value = "Altera os dados de um Book previamente registrado informando um ID de Author já cadastrado (opcional)")
+	@ApiOperation(value = "Altera os dados de um Book previamente registrado informando um ID de Author já cadastrado (opcional)")
 	@ApiResponses(value = {	@ApiResponse(code = 200, message = "Altera os dados de um Book previamente registrado informando um ID de Author já cadastrado (opcional)"),
 							@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
 							@ApiResponse(code = 500, message = "Foi gerada uma exceção"), })
 	@RequestMapping(value = "/update/{id}", method = RequestMethod.PUT, produces = "application/json")
 	@PutMapping("/update/{id}")
 	public ResponseEntity<?> update(@RequestBody BookDTO bookDTO, @PathVariable Long id) {
-		try {
-			if (bookService.findBookById(id) != null) {
-				Book bookSaved = bookService.save(bookDTO);
-
-				if (bookSaved != null && bookSaved.getId() == id) {
-					bookDTO.setId(id);
-					bookSaved.setName(bookDTO.getName());
-					bookSaved.setPages(bookDTO.getPages());
-					bookSaved.setChapters(bookDTO.getChapters());
-					bookSaved.setIsbn(bookDTO.getIsbn());
-					bookSaved.setPublisherName(bookDTO.getPublisherName());
-					bookSaved.setIdAuthor(bookDTO.getIdAuthor());
-
-					return new ResponseEntity<>(bookSaved, HttpStatus.CREATED);
-				}
-				return new ResponseEntity<>("ID do Book ou ID do Author não existe.", HttpStatus.NOT_FOUND);
-			}
-			return new ResponseEntity<>("ID informado para atualização não existe na base de dados.",
-					HttpStatus.NOT_FOUND);
-		} catch (DataIntegrityViolationException ex) {
-			return new ResponseEntity<>("Já existe um Book com esse nome: " + ex.getMessage(),
-					HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}*/
+		return bookService.update(bookDTO, id);
+	}
 
 	@ApiOperation(value = "Remove os dados de um Book previamente registrado informando um ID.")
 	@ApiResponses(value = {	@ApiResponse(code = 200, message = "Remove os dados de um Book previamente registrado informando um ID."),

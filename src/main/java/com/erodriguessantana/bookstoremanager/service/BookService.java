@@ -53,6 +53,33 @@ public class BookService {
 		}
 	}
 
+	public ResponseEntity<?> update(BookDTO bookDTO, Long id) {
+		try {
+			if (findBookById(id) != null) {
+				Book bookSaved = bookRepository.findById(id).orElse(null);
+
+				if ((bookSaved != null && bookSaved.getId() == id)
+						&& (authorRepository.findById(bookDTO.getIdAuthor()).isPresent())) {
+					bookSaved.setId(id);
+					bookSaved.setName(bookDTO.getName());
+					bookSaved.setPages(bookDTO.getPages());
+					bookSaved.setChapters(bookDTO.getChapters());
+					bookSaved.setIsbn(bookDTO.getIsbn());
+					bookSaved.setPublisherName(bookDTO.getPublisherName());
+					bookSaved.setIdAuthor(bookDTO.getIdAuthor());
+
+					return new ResponseEntity<>(bookRepository.save(bookSaved), HttpStatus.CREATED);
+				}
+				return new ResponseEntity<>("ID do Book ou ID do Author não existe.", HttpStatus.NOT_FOUND);
+			}
+			return new ResponseEntity<>("ID informado para atualização não existe na base de dados.",
+					HttpStatus.NOT_FOUND);
+		} catch (DataIntegrityViolationException ex) {
+			return new ResponseEntity<>("Já existe um Book com esse nome: " + ex.getMessage(),
+					HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
 	public ResponseEntity<?> findByBookAuthorByID(Long id) {
 		Book bookId = bookRepository.findById(id).orElse(null);
 
