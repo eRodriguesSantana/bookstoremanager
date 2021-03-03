@@ -1,4 +1,4 @@
-package com.erodriguessantana.bookstoremanager.swagger;
+package com.erodriguessantana.bookstoremanager.configs;
 
 import java.util.ArrayList;
 import java.util.List;
