@@ -2,6 +2,7 @@ package com.erodriguessantana.bookstoremanager.service;
 
 import java.util.List;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -36,12 +37,20 @@ public class BookService {
 		return new ResponseEntity<>("ID do Book informado não existe na base de dados.", HttpStatus.NOT_FOUND);
 	}
 
-	public Book save(BookDTO bookDTO) {
-		if (authorRepository.findById(bookDTO.getIdAuthor()).isPresent()) {
-			Book dtoToObjectBook = new ConverterBookDtoToObject().converterBookDtoToObject(bookDTO);
-			return bookRepository.save(dtoToObjectBook);
+	public ResponseEntity<?> save(BookDTO bookDTO) {
+		try {
+			if (authorRepository.findById(bookDTO.getIdAuthor()).isPresent()) {
+				return new ResponseEntity<>(
+						bookRepository.save(new ConverterBookDtoToObject().converterBookDtoToObject(bookDTO)),
+						HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<>("ID do Author informado não existe na base de dados.",
+						HttpStatus.NOT_FOUND);
+			}
+
+		} catch (DataIntegrityViolationException ex) {
+			return new ResponseEntity<>("Já existe um Book com esse nome.", HttpStatus.INTERNAL_SERVER_ERROR);
 		}
-		return null;
 	}
 
 	public ResponseEntity<?> findByBookAuthorByID(Long id) {
