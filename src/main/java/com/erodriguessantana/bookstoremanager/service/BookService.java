@@ -10,8 +10,8 @@ import com.erodriguessantana.bookstoremanager.entity.Author;
 import com.erodriguessantana.bookstoremanager.entity.Book;
 import com.erodriguessantana.bookstoremanager.repository.AuthorRepository;
 import com.erodriguessantana.bookstoremanager.repository.BookRepository;
-import com.erodriguessantana.bookstoremanager.utils.ConverterBookDtoToObject;
-import com.erodriguessantana.bookstoremanager.utils.ConverterObjectToBookDTO;
+import com.erodriguessantana.bookstoremanager.utilsBookDTO.ConverterBookDtoToObject;
+import com.erodriguessantana.bookstoremanager.utilsBookDTO.ConverterObjectToBookDTO;
 
 @Service
 public class BookService {

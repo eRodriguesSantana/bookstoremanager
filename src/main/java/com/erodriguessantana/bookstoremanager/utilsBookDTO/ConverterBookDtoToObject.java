@@ -1,4 +1,4 @@
-package com.erodriguessantana.bookstoremanager.utils;
+package com.erodriguessantana.bookstoremanager.utilsBookDTO;
 
 import com.erodriguessantana.bookstoremanager.dto.BookDTO;
 import com.erodriguessantana.bookstoremanager.entity.Book;
