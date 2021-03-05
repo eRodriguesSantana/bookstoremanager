@@ -1,10 +1,15 @@
 package com.erodriguessantana.bookstoremanager.dto;
 
+import com.erodriguessantana.bookstoremanager.entity.Author;
+
 public class AuthorDTO {
 
 	private Long id;
 	private String name;
 	private Integer age;
+	private Integer dayBirth;
+	private Integer monthBirth;
+	private Integer yearBirth;
 
 	public Long getId() {
 		return id;
@@ -23,10 +28,30 @@ public class AuthorDTO {
 	}
 
 	public Integer getAge() {
-		return age;
+		return Author.ageAuthor(getDayBirth(), getMonthBirth(), getYearBirth());
+	}
+	
+	public Integer getDayBirth() {
+		return dayBirth;
 	}
 
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setDayBirth(Integer dayBirth) {
+		this.dayBirth = dayBirth;
+	}
+
+	public Integer getMonthBirth() {
+		return monthBirth;
+	}
+
+	public void setMonthBirth(Integer monthBirth) {
+		this.monthBirth = monthBirth;
+	}
+
+	public Integer getYearBirth() {
+		return yearBirth;
+	}
+
+	public void setYearBirth(Integer yearBirth) {
+		this.yearBirth = yearBirth;
 	}
 }

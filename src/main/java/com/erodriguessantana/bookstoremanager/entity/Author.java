@@ -1,5 +1,8 @@
 package com.erodriguessantana.bookstoremanager.entity;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,15 +27,30 @@ public class Author {
 	@Column(nullable = false)
 	@NotNull
 	private Integer age;
+	
+	@Column(name = "day_birth", nullable = false)
+	@NotNull
+	private Integer dayBirth;
+	
+	@Column(name = "month_birth", nullable = false)
+	@NotNull
+	private Integer monthBirth;
+	
+	@Column(name = "year_birth", nullable = false)
+	@NotNull
+	private Integer yearBirth;
 
 	public Author() {}
-	
-	public Author(Long id, String name, Integer age) {
+
+	public Author(Long id, @NotBlank @Size(max = 200) String name, @NotNull Integer dayBirth,
+			@NotNull Integer monthBirth, @NotNull Integer yearBirth) {
 		this.id = id;
 		this.name = name;
-		this.age = age;
+		this.dayBirth = dayBirth;
+		this.monthBirth = monthBirth;
+		this.yearBirth = yearBirth;
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -48,12 +66,42 @@ public class Author {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public Integer getAge() {
-		return age;
+	
+	public Integer getDayBirth() {
+		return dayBirth;
 	}
 
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setDayBirth(Integer dayBirth) {
+		this.dayBirth = dayBirth;
+	}
+
+	public Integer getMonthBirth() {
+		return monthBirth;
+	}
+
+	public void setMonthBirth(Integer monthBirth) {
+		this.monthBirth = monthBirth;
+	}
+
+	public Integer getYearBirth() {
+		return yearBirth;
+	}
+
+	public void setYearBirth(Integer yearBirth) {
+		this.yearBirth = yearBirth;
+	}
+	
+	public Integer getAge() {
+		return Author.ageAuthor(getDayBirth(), getMonthBirth(), getYearBirth());
+	}
+	
+	public static int dateBirth(final LocalDate birthday) {
+	    final LocalDate currentDate = LocalDate.now();
+	    final Period period = Period.between(birthday, currentDate);
+	    return period.getYears();
+	}
+	
+	public static int ageAuthor(final int dayBirth, final int monthBirth, final int yearBirth) {		
+	    return dateBirth(LocalDate.of(yearBirth, monthBirth, dayBirth));
 	}
 }
