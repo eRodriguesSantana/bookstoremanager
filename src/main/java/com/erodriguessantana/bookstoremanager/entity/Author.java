@@ -42,8 +42,7 @@ public class Author {
 
 	public Author() {}
 
-	public Author(Long id, @NotBlank @Size(max = 200) String name, @NotNull Integer dayBirth,
-			@NotNull Integer monthBirth, @NotNull Integer yearBirth) {
+	public Author(Long id, String name, Integer dayBirth, Integer monthBirth, Integer yearBirth) {
 		this.id = id;
 		this.name = name;
 		this.dayBirth = dayBirth;
