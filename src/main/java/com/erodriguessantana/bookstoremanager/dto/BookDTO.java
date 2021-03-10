@@ -12,6 +12,9 @@ public class BookDTO {
 	@ApiModelProperty(value = "Nome do Book")
 	private String name;
 	
+	@ApiModelProperty(value = "Preço do Book")
+	private Double price;
+	
 	@ApiModelProperty(value = "Quantidade de páginas do Book")
 	private Integer pages;
 	
