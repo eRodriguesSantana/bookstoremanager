@@ -1,4 +1,4 @@
-package com.erodriguessantana.bookstoremanager.service;
+package com.erodriguessantana.bookstoremanager.entity;
 
 public abstract class PriceBook {
 
