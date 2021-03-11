@@ -63,6 +63,7 @@ public class BookService implements IBook{
 						&& (authorRepository.findById(bookDTO.getIdAuthor()).isPresent())) {
 					bookSaved.setId(id);
 					bookSaved.setName(bookDTO.getName());
+					bookSaved.setPrice(bookDTO.getPrice());
 					bookSaved.setPages(bookDTO.getPages());
 					bookSaved.setChapters(bookDTO.getChapters());
 					bookSaved.setIsbn(bookDTO.getIsbn());
