@@ -72,7 +72,6 @@ public class Book extends PriceBook {
 
 	public Book(Long id, String name, Double price, Integer pages, Integer chapters, String isbn, String publisherName,
 			Long idAuthor, BookType bookType) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
