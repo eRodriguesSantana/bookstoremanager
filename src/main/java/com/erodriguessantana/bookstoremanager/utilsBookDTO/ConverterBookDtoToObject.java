@@ -9,6 +9,7 @@ public class ConverterBookDtoToObject {
 		Book book = new Book();
 		book.setId(bookDTO.getId());
 		book.setName(bookDTO.getName());
+		book.setPrice(bookDTO.getPrice());
 		book.setPages(bookDTO.getPages());
 		book.setChapters(bookDTO.getChapters());
 		book.setIsbn(bookDTO.getIsbn());
